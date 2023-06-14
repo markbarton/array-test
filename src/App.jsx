@@ -5,24 +5,22 @@ import { useStore } from './store'
 
 
 function App() {
-
+  // import the initial data and updateRecords function from the store
   const { recordData, updateRecords } = useStore()
 
-  const [records, setRecords] = useState(recordData)
   function handleChange(index, e) {
-    const label = e.target.name
-    // Update the appropriate record without mutating state
-    const updatedRecords = records.map((record, i) => {
+    const label = e.target.name // name of field - must match store porperty name
+    // Update the appropriate record
+    const updatedRecords = recordData.map((record, i) => {
       if (i === index) {
         return { ...record, [label]: e.target.value }
       }
       return record
     })
-    setRecords(updatedRecords)
+    // Finally call our updateRecords function inside the store which will update the state
+    updateRecords(updatedRecords)
   }
-  function updateStore() {
-    updateRecords(records)
-  }
+
   return (
     <div className="min-h-full">
 
@@ -35,13 +33,12 @@ function App() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            {records.map((record, index) => {
+            {recordData.map((record, index) => {
               return (
                 < LoginForm key={record.id} index={index} lastName={record.lastName} firstName={record.firstName} onChangeHandler={handleChange} />
               )
             })}
-            <button onClick={updateStore} className="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-indigo">
-              Update Store</button>
+
           </div>
         </main>
       </div>
