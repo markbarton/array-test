@@ -1,5 +1,5 @@
-import { useState } from 'react'
-
+// Basic component with 2 input fields
+// Designed to be passed the values from a record in the records array as well as the index of that record and the handleChange function
 function LoginForm({ index, firstName, lastName, onChangeHandler }) {
 
     return (
