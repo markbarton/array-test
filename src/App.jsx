@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import LoginForm from './LoginForm'
+import { useStore } from './store'
 
-const recordData = [
-  { id: 1, firstName: 'Mark', lastName: 'Barton' },
-  { id: 2, firstName: 'Steven', lastName: 'Chapman' },
-  { id: 3, firstName: 'Will', lastName: 'Constable' },
-]
 
 
 function App() {
+
+  const { recordData, updateRecords } = useStore()
   const [records, setRecords] = useState(recordData)
   function handleChange(index, e) {
     const label = e.target.name
@@ -21,6 +19,7 @@ function App() {
     })
     setRecords(updatedRecords)
   }
+
   return (
     <div className="min-h-full">
 
